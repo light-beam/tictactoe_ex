@@ -29,7 +29,7 @@ defmodule Tictactoe.Board do
     Map.put(board, position, mark)
   end
     
-  def empty?(board) do
+  def fresh?(board) do
     not_present?(board, @player_marks)
   end
 
@@ -50,8 +50,8 @@ defmodule Tictactoe.Board do
     end
   end
 
-  def active?(board) do
-    !winner(board) && !full?(board)
+  def inactive?(board) do
+    !!winner(board) || full?(board)
   end
 
   def vacant_position?(board, position) do
