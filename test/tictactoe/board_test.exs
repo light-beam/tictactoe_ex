@@ -1,5 +1,6 @@
 defmodule Tictactoe.BoardTest do
   import Tictactoe.Board
+  import Tictactoe.Mark
   import Tictactoe.BoardHelpers
   use ExUnit.Case
 
@@ -8,12 +9,12 @@ defmodule Tictactoe.BoardTest do
   end
 
   test "returns mark for a given position" do
-    assert mark_at(new_board, 0) == :none
+    assert mark_at(new_board, 0) == void
   end
 
   test "adds move" do
-    board = add_move(new_board, 1, :x)
-    assert mark_at(board, 1) == :x
+    board = add_move(new_board, 1, x)
+    assert mark_at(board, 1) == x
   end
 
   test "returns vacant positions" do
@@ -29,7 +30,7 @@ defmodule Tictactoe.BoardTest do
   end
 
   test "returns winner if present" do
-    assert winner(win_board) == :x
+    assert winner(win_board) == x
   end
 
   test "no winner if drawn" do
