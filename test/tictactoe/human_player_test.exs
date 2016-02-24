@@ -1,23 +1,21 @@
 defmodule Tictactoe.HumanPlayerTest do
   import Tictactoe.HumanPlayer
   alias Tictactoe.Board
-  import Tictactoe.Mark
   alias Tictactoe.HumanPlayerTest.UIDouble, as: UIDouble
-  alias Tictactoe.UI
-  alias IO
   use ExUnit.Case
-  import Mock
 
   test "picks position" do
     board = Board.new_board
-    with_mock UIDouble, [get_position: fn(_) -> "irrelevant" end] do
-      pick_position(board, UIDouble)
-      assert called UIDouble.get_position(board)
-    end
+
+    result = pick_position(board, UIDouble)
+
+    assert result.board_sent == board
+    assert result.position_received == 0
   end
 
   defmodule UIDouble do
     def get_position(board) do
+      %{position_received: 0, board_sent: board}
     end
   end
 end
