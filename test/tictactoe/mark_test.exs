@@ -17,4 +17,8 @@ defmodule Tictactoe.MarkTest do
   test "is empty" do
     assert empty?(void) == true
   end
+
+  test "returns primary mark" do
+    assert primary == x
+  end
 end

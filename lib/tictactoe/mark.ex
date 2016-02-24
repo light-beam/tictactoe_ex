@@ -12,6 +12,10 @@ defmodule Tictactoe.Mark do
     "-"
   end
 
+  def primary do
+    x
+  end
+
   def player_marks do
     [x, o]
   end

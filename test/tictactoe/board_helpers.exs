@@ -14,7 +14,7 @@ defmodule Tictactoe.BoardHelpers do
                 void, void, void])
   end
 
-  def board_with_one_mark do
+  def board_with_one_move do
     make_board([x,    void, void,
                 void, void, void,
                 void, void, void])
