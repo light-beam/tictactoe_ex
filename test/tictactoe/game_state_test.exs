@@ -8,10 +8,6 @@ defmodule Tictactoe.GameStateTest do
 
   use ExUnit.Case
 
-  setup do
-    { :ok, player_x: PlayerXDouble, player_o: PlayerODouble }
-  end
-
   test "starts with fresh board" do
     board =
       fresh_game_state([])
@@ -20,12 +16,14 @@ defmodule Tictactoe.GameStateTest do
     assert Board.fresh?(board) == true
   end
 
-  test "sets players", %{ player_x: player_x, player_o: player_o } do
+  test "sets players" do
+    expected_players = [PlayerXDouble, PlayerODouble]
+
     players =
-      fresh_game_state([player_x, player_o])
+      fresh_game_state(expected_players)
       |> get_players
 
-    assert players == [player_x, player_o]
+    assert players == expected_players
   end
 
   test "sets primary mark as current" do
@@ -36,27 +34,27 @@ defmodule Tictactoe.GameStateTest do
     assert current_mark == Mark.primary
   end
 
-  test "updates board", %{ player_x: player_x, player_o: player_o } do
-    board =
-      fresh_game_state([player_x, player_o])
+  test "updates board" do
+    next_board =
+      fresh_game_state([PlayerXDouble, PlayerODouble])
       |> next
       |> get_board
 
-    assert Board.mark_at(board, 0) == Mark.x
+    assert Board.mark_at(next_board, 0) == Mark.x
   end
 
-  test "swaps players", %{ player_x: player_x, player_o: player_o } do
+  test "swaps players" do
     players =
-      fresh_game_state([player_x, player_o])
+      fresh_game_state([PlayerXDouble, PlayerODouble])
       |> next
       |> get_players
 
-    assert players == [player_o, player_x]
+    assert players == [PlayerODouble, PlayerXDouble]
   end
 
-  test "updates current mark", %{ player_x: player_x, player_o: player_o } do
+  test "updates current mark" do
     current_mark =
-      fresh_game_state([player_x, player_o])
+      fresh_game_state([PlayerXDouble, PlayerODouble])
       |> next
       |> get_mark
 
