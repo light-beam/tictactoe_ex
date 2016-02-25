@@ -1,7 +1,7 @@
 defmodule Tictactoe.Board do
   import Tictactoe.Mark
-  alias Enum
-  alias Map
+  alias  Enum
+  alias  Map
 
   @dimension 3
   @default_size @dimension*@dimension

@@ -1,7 +1,8 @@
 defmodule Tictactoe.HumanPlayerTest do
   import Tictactoe.HumanPlayer
-  alias Tictactoe.Board
-  alias Tictactoe.HumanPlayerTest.UIDouble, as: UIDouble
+  alias  Tictactoe.Board
+  alias  Tictactoe.HumanPlayerTest.UIDouble
+
   use ExUnit.Case
 
   test "picks position" do

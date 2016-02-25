@@ -2,6 +2,7 @@ defmodule Tictactoe.BoardTest do
   import Tictactoe.Board
   import Tictactoe.Mark
   import Tictactoe.BoardHelpers
+
   use ExUnit.Case
 
   test "new board is empty" do

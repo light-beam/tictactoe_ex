@@ -1,5 +1,6 @@
 defmodule Tictactoe.MarkTest do
   import Tictactoe.Mark
+
   use ExUnit.Case
 
   test "returns player marks" do
