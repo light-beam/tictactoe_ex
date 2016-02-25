@@ -9,8 +9,8 @@ defmodule Tictactoe.GameState do
     make_state(Board.new_board, players, Mark.primary)
   end
 
-  def over?(game_state) do
-    Board.inactive?(game_state.board)
+  def final?(game_state) do
+    Board.final?(game_state.board)
   end
 
   def make_state(board, players, mark) do

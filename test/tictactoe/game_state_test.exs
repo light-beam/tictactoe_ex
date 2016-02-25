@@ -7,30 +7,30 @@ defmodule Tictactoe.GameStateTest do
   use ExUnit.Case
 
   test "starts with fresh board" do
-    assert Board.fresh?(new_state([]).board) == true
+    assert Board.fresh?(new_state(:irrelevant).board) == true
   end
 
   test "sets players" do
-    expected_players = [PlayerX, PlayerO]
+    given_players = [PlayerX, PlayerO]
 
-    players = new_state(expected_players).players
+    players = new_state(given_players).players
 
-    assert players == expected_players
+    assert players == given_players
   end
 
   test "sets primary mark as current" do
-    assert new_state([]).mark == Mark.primary
+    assert new_state(:irrelevant).mark == Mark.primary
   end
 
-  test "is over" do
-    assert over?(end_state) == true
+  test "is final" do
+    assert final?(final_state) == true
   end
 
-  test "is not over" do
-    assert over?(active_state) == false
+  test "is not final" do
+    assert final?(active_state) == false
   end
 
-  defp end_state do
+  defp final_state do
     make_state( win_board, :irrelevant, :irrelevant )
   end
 

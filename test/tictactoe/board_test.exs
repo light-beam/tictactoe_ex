@@ -42,16 +42,16 @@ defmodule Tictactoe.BoardTest do
     assert winner(board_with_one_move) == nil
   end
 
-  test "is active" do
-    assert inactive?(board_with_one_move) == false
+  test "is not final" do
+    assert final?(board_with_one_move) == false
   end
 
-  test "inactive if winner present" do
-    assert inactive?(win_board) == true
+  test "is final if winner present" do
+    assert final?(win_board) == true
   end
 
-  test "inactive when drawn" do
-    assert inactive?(drawn_board) == true
+  test "is final when drawn" do
+    assert final?(drawn_board) == true
   end
 
   test "position is vacant" do

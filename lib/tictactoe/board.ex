@@ -49,7 +49,7 @@ defmodule Tictactoe.Board do
     end
   end
 
-  def inactive?(board) do
+  def final?(board) do
     !!winner(board) || full?(board)
   end
 
