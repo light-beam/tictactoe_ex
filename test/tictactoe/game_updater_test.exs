@@ -1,8 +1,8 @@
 defmodule Tictactoe.GameUpdaterTest do
   import Tictactoe.GameUpdater
+  import Tictactoe.Mark
   alias  Tictactoe.GameState
   alias  Tictactoe.Board
-  alias  Tictactoe.Mark
   alias  Tictactoe.GameUpdaterTest.PlayerXDouble
   alias  Tictactoe.GameUpdaterTest.PlayerODouble
 
@@ -16,7 +16,7 @@ defmodule Tictactoe.GameUpdaterTest do
   end
 
   test "updates board", %{ next_game_state: next_game_state } do
-    assert Board.mark_at(next_game_state.board, 0) == Mark.x
+    assert Board.mark_at(next_game_state.board, 0) == x
   end
 
   test "swaps players", %{ next_game_state: next_game_state } do
@@ -24,7 +24,7 @@ defmodule Tictactoe.GameUpdaterTest do
   end
 
   test "updates current mark", %{ next_game_state: next_game_state } do
-    assert next_game_state.mark == Mark.o
+    assert next_game_state.mark == o
   end
 
   defmodule PlayerXDouble do

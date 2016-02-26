@@ -1,6 +1,7 @@
-defmodule Tictactoe.BoardHelpers do
+defmodule Tictactoe.Helpers do
   import Tictactoe.Board
   import Tictactoe.Mark
+  alias  Tictactoe.GameState
 
   def drawn_board do
     make_board([x, o, x,
@@ -27,5 +28,13 @@ defmodule Tictactoe.BoardHelpers do
                    fn({ mark, position }, acc) ->
                      add_move(acc, position, mark)
                    end)
+  end
+
+  def final_game_state do
+    %GameState{ board: win_board }
+  end
+
+  def active_game_state do
+    %GameState{ board: board_with_one_move }
   end
 end

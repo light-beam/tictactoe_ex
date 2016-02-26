@@ -1,7 +1,7 @@
 defmodule Tictactoe.BoardTest do
   import Tictactoe.Board
   import Tictactoe.Mark
-  import Tictactoe.BoardHelpers
+  import Tictactoe.Helpers
 
   use ExUnit.Case
 

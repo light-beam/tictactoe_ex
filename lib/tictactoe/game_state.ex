@@ -18,5 +18,4 @@ defmodule Tictactoe.GameState do
                 players: players,
                 mark:    mark }
   end
-
 end

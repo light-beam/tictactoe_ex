@@ -1,13 +1,13 @@
 defmodule Tictactoe.GameStateTest do
   import Tictactoe.GameState
-  import Tictactoe.BoardHelpers
+  import Tictactoe.Helpers
   alias  Tictactoe.Board
   alias  Tictactoe.Mark
 
   use ExUnit.Case
 
   test "starts with fresh board" do
-    assert Board.fresh?(new_state(:irrelevant).board) == true
+    assert Board.fresh?(new_state(:players).board) == true
   end
 
   test "sets players" do
@@ -19,22 +19,14 @@ defmodule Tictactoe.GameStateTest do
   end
 
   test "sets primary mark as current" do
-    assert new_state(:irrelevant).mark == Mark.primary
+    assert new_state(:players).mark == Mark.primary
   end
 
   test "is final" do
-    assert final?(final_state) == true
+    assert final?(final_game_state) == true
   end
 
   test "is not final" do
-    assert final?(active_state) == false
-  end
-
-  defp final_state do
-    make_state( win_board, :irrelevant, :irrelevant )
-  end
-
-  defp active_state do
-    make_state( board_with_one_move, :irrelevant, :irrelevant )
+    assert final?(active_game_state) == false
   end
 end
