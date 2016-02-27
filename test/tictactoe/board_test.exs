@@ -27,7 +27,7 @@ defmodule Tictactoe.BoardTest do
   end
 
   test "is not full" do
-    assert full?(board_with_one_move) == false
+    assert full?(first_position_taken_board) == false
   end
 
   test "returns winner if present" do
@@ -39,11 +39,11 @@ defmodule Tictactoe.BoardTest do
   end
 
   test "no winner when active" do
-    assert winner(board_with_one_move) == nil
+    assert winner(first_position_taken_board) == nil
   end
 
   test "is not final" do
-    assert final?(board_with_one_move) == false
+    assert final?(first_position_taken_board) == false
   end
 
   test "is final if winner present" do
@@ -59,6 +59,6 @@ defmodule Tictactoe.BoardTest do
   end
 
   test "position is not vacant" do
-    assert vacant_position?(board_with_one_move, 0) == false
+    assert vacant_position?(first_position_taken_board, 0) == false
   end
 end

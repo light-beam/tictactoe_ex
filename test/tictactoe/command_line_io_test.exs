@@ -12,7 +12,7 @@ defmodule Tictactoe.CommandLineIOTest do
     assert output == "message"
   end
 
-   test "retrieves input" do
+   test "requests and receives input" do
      input = "input"
 
      output = capture_io(input, fn ->

@@ -15,7 +15,7 @@ defmodule Tictactoe.Helpers do
                 void, void, void])
   end
 
-  def board_with_one_move do
+  def first_position_taken_board do
     make_board([x,    void, void,
                 void, void, void,
                 void, void, void])
@@ -35,6 +35,26 @@ defmodule Tictactoe.Helpers do
   end
 
   def active_game_state do
-    %GameState{ board: board_with_one_move }
+    %GameState{ board: first_position_taken_board }
+  end
+
+  def invocation_details do
+    receive do
+      details -> details
+    after
+      0 -> %{ name: :no_name, args: [] }
+    end
+  end
+
+  def echo_invoked(details) do
+    send(self, details)
+  end
+
+  def contains?(body, segment) do
+    String.contains?(body, segment)
+  end
+
+  def ends_with?(body, segment) do
+    String.ends_with?(body, segment)
   end
 end
