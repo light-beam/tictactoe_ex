@@ -1,4 +1,4 @@
-defmodule Tictactoe.CommandLineIO do
+defmodule Tictactoe.UI.CommandLineIO do
 
   def show(message) do
     IO.write(message)

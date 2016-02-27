@@ -1,5 +1,5 @@
-defmodule Tictactoe.CommandLineIOTest do
-  import Tictactoe.CommandLineIO
+defmodule Tictactoe.UI.CommandLineIOTest do
+  import Tictactoe.UI.CommandLineIO
   import ExUnit.CaptureIO
 
   use ExUnit.Case
