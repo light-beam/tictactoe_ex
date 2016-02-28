@@ -2,9 +2,15 @@ defmodule Tictactoe.UI.CommandLineUI do
   @io              Tictactoe.UI.CommandLineIO
   @board           Tictactoe.Board
   @numeric_fetcher Tictactoe.UI.NumericFetcher
+  @board_formatter Tictactoe.UI.BoardFormatter
 
   @prompt_for_position     "Please select position: "
   @invalid_option_alert    "Invalid option, please try again"
+
+  def display_board(board) do
+     @board_formatter.format(board)
+     |> @io.show
+  end
 
   def get_position(board) do
     @numeric_fetcher.get_number(@prompt_for_position)

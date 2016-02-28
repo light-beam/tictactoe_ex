@@ -1,7 +1,5 @@
 defmodule Tictactoe.Board do
   import Tictactoe.Mark
-  alias  Enum
-  alias  Map
 
   @dimension 3
   @default_size @dimension*@dimension
@@ -15,38 +13,37 @@ defmodule Tictactoe.Board do
                          [2, 4, 6]]
 
   def new_board do
-    Enum.reduce((0..@default_size - 1),
-                Map.new,
-                fn(position, acc) -> Map.put(acc, position, void) end)
+    (0..@default_size - 1)
+    |> Enum.reduce(Map.new,
+                   fn(position, acc) -> Map.put(acc, position, void) end)
   end
 
   def mark_at(board, position) do
-    Map.fetch!(board, position)
+    board |> Map.fetch!(position)
   end
 
   def add_move(board, position, mark) do
-    Map.put(board, position, mark)
+    board |> Map.put(position, mark)
   end
     
   def fresh?(board) do
-    marks_not_present?(board, player_marks)
+    board |> marks_not_present?(player_marks)
   end
 
   def full?(board) do
-    marks_not_present?(board, [void])
+    board |> marks_not_present?([void])
   end
 
   def vacant_positions(board) do
     board
     |> Stream.filter(fn({_, mark}) -> empty?(mark) end)
     |> Enum.into(Map.new)
-    |> Map.keys
+    |> get_positions
   end
 
   def winner(board) do
-    if line = winner_line(board) do
-      hd(line)
-    end
+    line = winner_line(board)
+    line && hd(line)
   end
 
   def final?(board) do
@@ -54,12 +51,20 @@ defmodule Tictactoe.Board do
   end
 
   def vacant_position?(board, position) do
-    mark_at(board, position)
-    |> empty?
+    board |> mark_at(position) |> empty?
+  end
+
+  def rows(board) do
+    board |> Enum.chunk(@dimension)
+  end
+
+  def get_positions(board) do
+    board |> Map.keys
   end
 
   defp winner_line(board) do
-    lines_for(board)
+    board
+    |> lines_for
     |> Enum.find(fn(marks) ->
                      [ h | t ] = Enum.uniq(marks)
                      Enum.empty?(t) && Enum.member?(player_marks, h)
@@ -75,13 +80,13 @@ defmodule Tictactoe.Board do
 
   defp marks_for(board, positions) do
     positions
-    |> Stream.map(fn(position) -> board[position] end)
+    |> Stream.map(fn(position) -> mark_at(board, position) end)
     |> Enum.into([])
   end
 
   defp marks_not_present?(board, marks) do
-    !Enum.any?(board, fn({_, mark}) ->
-                        Enum.member?(marks, mark)
-                      end)
+    !(board |> Enum.any?(fn({_, mark}) ->
+                           Enum.member?(marks, mark)
+                         end))
   end
 end

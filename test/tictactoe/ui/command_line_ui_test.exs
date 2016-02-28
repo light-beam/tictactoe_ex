@@ -2,6 +2,7 @@ defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.UI.CommandLineUI
   import Tictactoe.Helpers
   import Tictactoe.Board
+  import Tictactoe.UI.BoardFormatter
   import ExUnit.CaptureIO
 
   use ExUnit.Case
@@ -50,5 +51,16 @@ defmodule Tictactoe.UI.CommandLineUITest do
     end)
 
     assert ends_with?(output, "Please select position: ")
+  end
+
+  test "displays formatted board" do
+    raw_board = win_board
+    formatted_board = format(raw_board)
+
+    output = capture_io(fn ->
+      display_board(raw_board)
+    end)
+
+    assert output == formatted_board
   end
 end

@@ -61,4 +61,14 @@ defmodule Tictactoe.BoardTest do
   test "position is not vacant" do
     assert vacant_position?(first_position_taken_board, 0) == false
   end
+
+  test "returns positions" do
+    assert get_positions(new_board) == [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  end
+
+  test "splits into rows" do
+    assert rows(get_positions(new_board)) == [[0, 1, 2],
+                                              [3, 4, 5],
+                                              [6, 7, 8]]
+  end
 end
