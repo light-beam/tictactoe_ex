@@ -1,26 +1,26 @@
-defmodule Tictactoe.GameRunnerTest do
-  import Tictactoe.GameRunner
+defmodule Tictactoe.GameConductorTest do
+  import Tictactoe.GameConductor
   import Tictactoe.Helpers
   import Integer
 
   @game_state   Tictactoe.GameState
   @player_x     PlayerDouble
   @player_o     PlayerDouble
-  @ui           Tictactoe.GameRunnerTest.UIDouble
-  @game_updater Tictactoe.GameRunnerTest.GameUpdaterDouble
+  @ui           Tictactoe.GameConductorTest.UIDouble
+  @game_updater Tictactoe.GameConductorTest.GameUpdaterDouble
 
   use ExUnit.Case
 
   test "updates non final game state" do
     initial_game_state = @game_state.new_state(:players)
     
-    next_game_state = run(initial_game_state, @game_updater, @ui)
+    next_game_state = play(initial_game_state, @game_updater, @ui)
 
     assert is_updated(initial_game_state, next_game_state) == true
   end
 
   test "does not update final game state" do
-    next_game_state = run(final_game_state, @game_updater, @ui)
+    next_game_state = play(final_game_state, @game_updater, @ui)
 
     assert is_updated(final_game_state, next_game_state) == false
   end
@@ -28,7 +28,7 @@ defmodule Tictactoe.GameRunnerTest do
   test "runs until end game state" do
     game_state = @game_state.new_state([@player_x, @player_o])
     
-    last_game_state = run(game_state, @game_updater, @ui)
+    last_game_state = play(game_state, @game_updater, @ui)
 
     assert @game_state.final?(last_game_state) == true
   end
@@ -36,7 +36,7 @@ defmodule Tictactoe.GameRunnerTest do
   test "displays board" do
     game_state = @game_state.new_state([@player_x, @player_o])
     
-    run(game_state, @game_updater, @ui)
+    play(game_state, @game_updater, @ui)
     
     invoked = invocation_details
     assert invoked.name == :display_board
