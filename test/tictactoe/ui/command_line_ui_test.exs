@@ -1,8 +1,8 @@
 defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.UI.CommandLineUI
+  import Tictactoe.UI.BoardFormatter
   import Tictactoe.Helpers
   import Tictactoe.Board
-  import Tictactoe.UI.BoardFormatter
   import ExUnit.CaptureIO
 
   use ExUnit.Case

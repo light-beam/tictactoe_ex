@@ -1,15 +1,16 @@
 defmodule Tictactoe.HumanPlayerTest do
   import Tictactoe.HumanPlayer
   import Tictactoe.Helpers
-  alias  Tictactoe.Board
-  alias  Tictactoe.HumanPlayerTest.UIDouble
+
+  @ui    Tictactoe.HumanPlayerTest.UIDouble
+  @board Tictactoe.Board
 
   use ExUnit.Case
 
   test "picks position" do
-    board = Board.new_board
+    board = @board.new_board
 
-    pick_position(board, UIDouble)
+    pick_position(board, @ui)
 
     invoked = invocation_details
     assert invoked.name == :get_position

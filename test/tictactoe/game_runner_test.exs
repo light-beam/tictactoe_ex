@@ -2,38 +2,41 @@ defmodule Tictactoe.GameRunnerTest do
   import Tictactoe.GameRunner
   import Tictactoe.Helpers
   import Integer
-  alias  Tictactoe.GameState
-  alias  Tictactoe.GameRunnerTest.GameUpdaterDouble
-  alias  Tictactoe.GameRunnerTest.UIDouble
+
+  @game_state   Tictactoe.GameState
+  @player_x     PlayerDouble
+  @player_o     PlayerDouble
+  @ui           Tictactoe.GameRunnerTest.UIDouble
+  @game_updater Tictactoe.GameRunnerTest.GameUpdaterDouble
 
   use ExUnit.Case
 
   test "updates non final game state" do
-    initial_game_state = GameState.new_state(:players)
+    initial_game_state = @game_state.new_state(:players)
     
-    next_game_state = run(initial_game_state, GameUpdaterDouble, UIDouble)
+    next_game_state = run(initial_game_state, @game_updater, @ui)
 
     assert is_updated(initial_game_state, next_game_state) == true
   end
 
   test "does not update final game state" do
-    next_game_state = run(final_game_state, GameUpdaterDouble, UIDouble)
+    next_game_state = run(final_game_state, @game_updater, @ui)
 
     assert is_updated(final_game_state, next_game_state) == false
   end
 
   test "runs until end game state" do
-    game_state = GameState.new_state([HumanPlayer, HumanPlayer])
+    game_state = @game_state.new_state([@player_x, @player_o])
     
-    last_game_state = run(game_state, GameUpdaterDouble, UIDouble)
+    last_game_state = run(game_state, @game_updater, @ui)
 
-    assert GameState.final?(last_game_state) == true
+    assert @game_state.final?(last_game_state) == true
   end
 
   test "displays board" do
-    game_state = GameState.new_state([HumanPlayer, HumanPlayer])
+    game_state = @game_state.new_state([@player_x, @player_o])
     
-    run(game_state, GameUpdaterDouble, UIDouble)
+    run(game_state, @game_updater, @ui)
     
     invoked = invocation_details
     assert invoked.name == :display_board
@@ -52,18 +55,19 @@ defmodule Tictactoe.GameRunnerTest do
 
   defmodule GameUpdaterDouble do
     import Tictactoe.Mark
-    alias  Tictactoe.Board
+
+    @board Tictactoe.Board
 
     def update(game_state, _) do
-      %GameState{ board: next_board(game_state.board) }
+      %Tictactoe.GameState{ board: next_board(game_state.board) }
     end
 
     defp next_board(board) do
-      Board.add_move(board, get_position(board), current_mark(board))
+      @board.add_move(board, get_position(board), current_mark(board))
     end
 
     defp get_position(board) do
-      Enum.random(Board.vacant_positions(board))
+      Enum.random(@board.vacant_positions(board))
     end
 
     defp current_mark(board) do

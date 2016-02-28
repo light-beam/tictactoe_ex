@@ -1,16 +1,17 @@
 defmodule Tictactoe.GameState do
-  alias Tictactoe.Board
-  alias Tictactoe.Mark
   alias __MODULE__
+
+  @board Tictactoe.Board
+  @mark  Tictactoe.Mark
 
   defstruct [ :board, :players, :mark ]
 
   def new_state(players) do
-    make_state(Board.new_board, players, Mark.primary)
+    make_state(@board.new_board, players, @mark.primary)
   end
 
   def final?(game_state) do
-    Board.final?(game_state.board)
+    @board.final?(game_state.board)
   end
 
   def make_state(board, players, mark) do

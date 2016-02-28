@@ -65,10 +65,12 @@ defmodule Tictactoe.Board do
   defp winner_line(board) do
     board
     |> lines_for
-    |> Enum.find(fn(marks) ->
-                     [ h | t ] = Enum.uniq(marks)
-                     Enum.empty?(t) && Enum.member?(player_marks, h)
-                   end)
+    |> Enum.find(fn(line) -> full_single_mark_line?(line) end)
+  end
+
+  defp full_single_mark_line?(line) do
+    [ h | t ] = Enum.uniq(line)
+    Enum.empty?(t) && Enum.member?(player_marks, h)
   end
 
   defp lines_for(board) do

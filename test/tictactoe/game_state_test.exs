@@ -1,17 +1,20 @@
 defmodule Tictactoe.GameStateTest do
   import Tictactoe.GameState
   import Tictactoe.Helpers
-  alias  Tictactoe.Board
-  alias  Tictactoe.Mark
+
+  @player_x PlayerXDouble
+  @player_o PlayerODouble
+  @board    Tictactoe.Board
+  @mark     Tictactoe.Mark
 
   use ExUnit.Case
 
   test "starts with fresh board" do
-    assert Board.fresh?(new_state(:players).board) == true
+    assert @board.fresh?(new_state(:players).board) == true
   end
 
   test "sets players" do
-    given_players = [PlayerX, PlayerO]
+    given_players = [@player_x, @player_o]
 
     players = new_state(given_players).players
 
@@ -19,7 +22,7 @@ defmodule Tictactoe.GameStateTest do
   end
 
   test "sets primary mark as current" do
-    assert new_state(:players).mark == Mark.primary
+    assert new_state(:players).mark == @mark.primary
   end
 
   test "is final" do
