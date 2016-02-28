@@ -1,22 +1,23 @@
-defmodule Tictactoe.GameLoopTest do
-  import Tictactoe.GameLoop
+defmodule Tictactoe.GameRunnerTest do
+  import Tictactoe.GameRunner
   import Tictactoe.Helpers
   import Integer
   alias  Tictactoe.GameState
-  alias  Tictactoe.GameLoopTest.GameUpdaterDouble
+  alias  Tictactoe.GameRunnerTest.GameUpdaterDouble
+  alias  Tictactoe.GameRunnerTest.UIDouble
 
   use ExUnit.Case
 
   test "updates non final game state" do
     initial_game_state = GameState.new_state(:players)
     
-    next_game_state = run(initial_game_state, GameUpdaterDouble)
+    next_game_state = run(initial_game_state, GameUpdaterDouble, UIDouble)
 
     assert is_updated(initial_game_state, next_game_state) == true
   end
 
   test "does not update final game state" do
-    next_game_state = run(final_game_state, GameUpdaterDouble)
+    next_game_state = run(final_game_state, GameUpdaterDouble, UIDouble)
 
     assert is_updated(final_game_state, next_game_state) == false
   end
@@ -24,13 +25,29 @@ defmodule Tictactoe.GameLoopTest do
   test "runs until end game state" do
     game_state = GameState.new_state([HumanPlayer, HumanPlayer])
     
-    last_game_state = run(game_state, GameUpdaterDouble)
+    last_game_state = run(game_state, GameUpdaterDouble, UIDouble)
 
     assert GameState.final?(last_game_state) == true
   end
 
+  test "displays board" do
+    game_state = GameState.new_state([HumanPlayer, HumanPlayer])
+    
+    run(game_state, GameUpdaterDouble, UIDouble)
+    
+    invoked = invocation_details
+    assert invoked.name == :display_board
+    assert invoked.args == game_state.board
+  end
+
   defp is_updated(initial_state, next_game_state) do
     initial_state.board != next_game_state.board
+  end
+
+  defmodule UIDouble do
+    def display_board(board) do
+      echo_invoked(%{name: :display_board, args: board})
+    end
   end
 
   defmodule GameUpdaterDouble do
