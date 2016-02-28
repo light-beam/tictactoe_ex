@@ -1,22 +1,23 @@
 defmodule Tictactoe.GameUpdater do
-  alias Tictactoe.GameState
-  alias Tictactoe.Board
-  alias Tictactoe.Mark
+  @game_state Tictactoe.GameState
+  @board Tictactoe.Board
+  @mark Tictactoe.Mark
 
-  def update(game_state) do
-    GameState.make_state(next_board(game_state),
+  def update(game_state, ui) do
+    @game_state.make_state(next_board(game_state, ui),
                          swap_players(game_state),
                          next_mark(game_state))
   end
 
-  defp next_board(game_state) do
-    Board.add_move(game_state.board,
-                   get_position(game_state),
+  defp next_board(game_state, ui) do
+    @board.add_move(game_state.board,
+                   get_position(game_state, ui),
                    game_state.mark)
   end
 
-  defp get_position(game_state) do
-    next_player(game_state.players).pick_position(game_state.board)
+  defp get_position(game_state, ui) do
+    game_state.board
+    |> next_player(game_state.players).pick_position(ui)
   end
 
   defp next_player(players) do
@@ -28,6 +29,6 @@ defmodule Tictactoe.GameUpdater do
   end
 
   defp next_mark(game_state) do
-    Mark.opponent(game_state.mark)
+    @mark.opponent(game_state.mark)
   end
 end

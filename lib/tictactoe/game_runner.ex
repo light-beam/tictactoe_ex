@@ -1,12 +1,12 @@
 defmodule Tictactoe.GameRunner do
-  alias Tictactoe.GameState
+  @game_state Tictactoe.GameState
 
   def run(game_state, game_updater, ui) do
     display_board(game_state, ui)
 
     cond do
-      GameState.final?(game_state) -> game_state
-      true -> game_updater.update(game_state)
+      @game_state.final?(game_state) -> game_state
+      true -> game_updater.update(game_state, ui)
               |> run(game_updater, ui)
     end
   end

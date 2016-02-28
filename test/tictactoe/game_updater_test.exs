@@ -11,7 +11,7 @@ defmodule Tictactoe.GameUpdaterTest do
   setup do
     next_game_state = 
       GameState.new_state([PlayerXDouble, PlayerODouble])
-      |> update
+      |> update(UIDouble)
     { :ok, next_game_state: next_game_state }
   end
 
@@ -28,13 +28,13 @@ defmodule Tictactoe.GameUpdaterTest do
   end
 
   defmodule PlayerXDouble do
-    def pick_position(_) do
+    def pick_position(_, _) do
       0
     end
   end
 
   defmodule PlayerODouble do
-    def pick_position(_) do
+    def pick_position(_, _) do
       1
     end
   end

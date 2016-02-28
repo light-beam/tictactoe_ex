@@ -54,7 +54,7 @@ defmodule Tictactoe.GameRunnerTest do
     import Tictactoe.Mark
     alias  Tictactoe.Board
 
-    def update(game_state) do
+    def update(game_state, _) do
       %GameState{ board: next_board(game_state.board) }
     end
 
