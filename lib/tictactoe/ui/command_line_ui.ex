@@ -4,7 +4,8 @@ defmodule Tictactoe.UI.CommandLineUI do
   @board_formatter   Tictactoe.UI.BoardFormatter
   @position_selector Tictactoe.UI.PositionSelector
 
-  @greeting             "Welcome to the Tic Tac Toe Arcade!"
+  @greeting    "Welcome to the Tic Tac Toe Arcade!"
+  @astelavista "Astelavista..."
 
   def greet do
     @greeting |> @io.show
@@ -33,6 +34,10 @@ defmodule Tictactoe.UI.CommandLineUI do
 
   def clear_screen do
     @io.clear_screen
+  end
+
+  def astelavista do
+    @astelavista |> @io.show
   end
 
   defp display_winner(winner) do

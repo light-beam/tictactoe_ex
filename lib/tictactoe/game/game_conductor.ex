@@ -3,7 +3,7 @@ defmodule Tictactoe.Game.GameConductor do
   @board      Tictactoe.Board
 
   def play(game_state, game_updater, ui) do
-    ui |> clear_screen
+    ui.clear_screen
     game_state |> display_board(ui)
 
     cond do
@@ -23,9 +23,5 @@ defmodule Tictactoe.Game.GameConductor do
     game_state.board
     |> @board.winner
     |> ui.display_result
-  end
-
-  defp clear_screen(ui) do
-    ui.clear_screen
   end
 end

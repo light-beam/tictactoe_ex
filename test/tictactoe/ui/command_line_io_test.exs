@@ -25,6 +25,6 @@ defmodule Tictactoe.UI.CommandLineIOTest do
     output = capture_io(fn ->
       clear_screen
     end)
-    assert output == ("\e[2J\e[H")
+    assert output == "\e[2J\e[H"
   end
 end

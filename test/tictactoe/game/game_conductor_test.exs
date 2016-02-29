@@ -72,11 +72,8 @@ defmodule Tictactoe.Game.GameConductorTest do
       echo_invoked(%{name: :display_board, args: board})
     end
 
-    def display_result(_) do
-    end
-
-    def clear_screen do
-    end
+    def display_result(_) do end
+    def clear_screen do end
   end
 
   defmodule ResultDisplayUIDouble do
@@ -84,11 +81,8 @@ defmodule Tictactoe.Game.GameConductorTest do
       echo_invoked(%{name: :display_result, args: winner})
     end
 
-    def display_board(_) do
-    end
-
-    def clear_screen do
-    end
+    def display_board(_) do end
+    def clear_screen do end
   end
 
   defmodule ClearDisplayUIDouble do

@@ -110,4 +110,12 @@ defmodule Tictactoe.UI.CommandLineUITest do
 
     assert contains?(output, "\e[2J\e[H")
   end
+
+  test "bids farewell" do
+    output = capture_io(fn ->
+      astelavista
+    end)
+
+    assert contains?(output, "Astelavista...")
+  end
 end
