@@ -1,11 +1,13 @@
 defmodule Tictactoe.UI.CommandLineIO do
 
+  @line_space "\n"
+
   def show(message) do
-    IO.puts(message)
+    IO.puts(message <> @line_space)
   end
 
   def request_input(request) do
-    IO.gets(request)
+    IO.gets(request <> @line_space)
   end
 
   def clear_screen do

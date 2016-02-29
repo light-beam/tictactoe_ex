@@ -4,12 +4,12 @@ defmodule Tictactoe.UI.CommandLineIOTest do
 
   use ExUnit.Case
 
-  test "shows message" do
+  test "shows message followed by line space" do
     output = capture_io(fn ->
       show("message")
     end)
 
-    assert output == "message\n"
+    assert output == "message\n\n"
   end
 
   test "requests and receives input" do
@@ -18,7 +18,7 @@ defmodule Tictactoe.UI.CommandLineIOTest do
     output = capture_io(input, fn ->
       assert request_input("request") == input
     end)
-    assert output == ("request")
+    assert output == ("request\n")
   end
 
   test "clears screen" do

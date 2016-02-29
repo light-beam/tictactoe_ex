@@ -1,4 +1,6 @@
 defmodule Tictactoe.UI.CommandLineUITest do
+  use ExUnit.Case
+
   import Tictactoe.UI.CommandLineUI
   import Tictactoe.UI.BoardFormatter
   import Tictactoe.Helpers
@@ -6,14 +8,48 @@ defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.Mark
   import ExUnit.CaptureIO
 
-  use ExUnit.Case
+  @invalid_option_alert "Invalid option, please try again"
+  @non_numeric_alert    "Invalid input, number required"
+
+  test "greets" do
+    output = capture_io(fn -> greet end)
+
+    assert contains?(output, "Welcome to the Tic Tac Toe Arcade!")
+  end
+
+  test "displays game options" do
+    output = capture_io("1", fn ->
+      get_game_option
+    end)
+
+    assert output == "Please enter option number:\n"  <>
+                     "1 - play with a friend\n"       <>
+                     "2 - play first against AI\n"    <>
+                     "3 - play second against AI\n"   <>
+                     "4 - computer plays against itself\n"
+  end
+
+  test "retrieves game option" do
+    capture_io("1", fn ->
+      assert get_game_option == 1
+    end)
+  end
+
+  test "alerts and keeps requesting till valid game option" do
+    output = capture_io("a\n5\n1", fn ->
+      get_game_option == 1
+    end)
+
+    assert contains?(output, @non_numeric_alert)
+    assert contains?(output, @invalid_option_alert)
+  end
 
   test "prompts for position input" do
     output = capture_io("1", fn ->
       get_position(new_board)
     end)
 
-    assert contains?(output, "Please select position: ")
+    assert contains?(output, "Please select position:")
   end
 
   test "translates position input into position" do
@@ -22,36 +58,22 @@ defmodule Tictactoe.UI.CommandLineUITest do
     end)
   end
 
-  test "alerts when non-numeric input" do
-    output = capture_io("invalid\n1", fn ->
-      get_position(new_board)
-    end)
-
-    assert contains?(output, "Invalid input, number required")
-  end
-
-  test "keeps requesting till numeric input" do
-    output = capture_io("invalid\n1", fn ->
-      assert get_position(new_board) == 0
-    end)
-
-    assert ends_with?(output, "Please select position: ")
-  end
-
-  test "alerts if numeric input is not a valid position" do
+  test "alerts if position is taken" do
     output = capture_io("1\n2", fn ->
       get_position(first_position_taken_board)
     end)
 
-    assert contains?(output, "Invalid option, please try again")
+    assert contains?(output, @invalid_option_alert)
   end
 
-  test "keeps requesting till valid position" do
-    output = capture_io("invalid\n1", fn ->
+  test "alerts and keeps requesting till valid position" do
+    output = capture_io("invalid\n10\n1", fn ->
       assert get_position(new_board) == 0
     end)
 
-    assert ends_with?(output, "Please select position: ")
+    assert contains?(output, @non_numeric_alert)
+    assert contains?(output, @invalid_option_alert)
+    assert ends_with?(output, "Please select position:\n")
   end
 
   test "displays formatted board" do
