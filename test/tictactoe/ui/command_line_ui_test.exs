@@ -3,6 +3,7 @@ defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.UI.BoardFormatter
   import Tictactoe.Helpers
   import Tictactoe.Board
+  import Tictactoe.Mark
   import ExUnit.CaptureIO
 
   use ExUnit.Case
@@ -61,6 +62,30 @@ defmodule Tictactoe.UI.CommandLineUITest do
       display_board(raw_board)
     end)
 
-    assert output == formatted_board
+    assert contains?(output, formatted_board)
+  end
+
+  test "displays winning result" do
+    output = capture_io(fn ->
+      display_result(x)
+    end)
+
+    assert contains?(output, "Player X has won this game!")
+  end
+
+  test "displays draw result" do
+    output = capture_io(fn ->
+      display_result(nil)
+    end)
+
+    assert contains?(output, "It's a draw!")
+  end
+
+  test "clears screen" do
+    output = capture_io(fn ->
+      clear_screen
+    end)
+
+    assert contains?(output, "\e[2J\e[H")
   end
 end

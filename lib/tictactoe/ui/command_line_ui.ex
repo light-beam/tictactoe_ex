@@ -20,6 +20,26 @@ defmodule Tictactoe.UI.CommandLineUI do
     |> validate_position(board)
   end
 
+  def display_result(mark) do
+    cond do
+      mark -> display_winner(mark)
+      true -> display_draw
+    end
+  end
+
+  def clear_screen do
+    @io.clear_screen
+  end
+
+  defp display_winner(winner) do
+    "Player " <> to_string(winner) <> " has won this game!"
+    |> @io.show
+  end
+
+  defp display_draw do
+    "It's a draw!" |> @io.show
+  end
+
   defp zero_index_offset(number) do
     number - 1
   end
