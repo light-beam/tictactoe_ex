@@ -1,4 +1,4 @@
-defmodule Tictactoe.Game.GameState do
+defmodule Tictactoe.GameState do
   alias __MODULE__
 
   @board Tictactoe.Board

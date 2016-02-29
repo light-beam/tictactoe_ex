@@ -1,7 +1,7 @@
 defmodule Tictactoe.Helpers do
   import Tictactoe.Board
   import Tictactoe.Mark
-  alias  Tictactoe.Game.GameState
+  alias  Tictactoe.GameState
 
   def drawn_board do
     make_board([x, o, x,
@@ -21,6 +21,12 @@ defmodule Tictactoe.Helpers do
                 void, void, void])
   end
 
+  def one_vacant_move_board do
+    make_board([x, o, x,
+                x, o, o,
+                o, x, void])
+  end
+
   def make_board(marks) do
     marks
     |> Stream.with_index
@@ -30,8 +36,8 @@ defmodule Tictactoe.Helpers do
                    end)
   end
 
-  def final_game_state do
-    %GameState{ board: win_board }
+  def final_game_state(players) do
+    %GameState{ board: win_board, players: players }
   end
 
   def active_game_state do
