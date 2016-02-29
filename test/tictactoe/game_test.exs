@@ -1,15 +1,15 @@
 defmodule Tictactoe.GameTest do
+  use ExUnit.Case
+
   import Tictactoe.Helpers
   import ExUnit.CaptureIO
   
-  @player_x     Tictactoe.HumanPlayer
-  @player_o     Tictactoe.HumanPlayer
-  @game_state   Tictactoe.GameState
-  @game_conductor Tictactoe.GameConductor
-  @game_updater Tictactoe.GameUpdater
-  @ui           Tictactoe.UI.CommandLineUI
-
-  use ExUnit.Case
+  @ui             Tictactoe.UI.CommandLineUI
+  @player_x       Tictactoe.HumanPlayer
+  @player_o       Tictactoe.HumanPlayer
+  @game_state     Tictactoe.Game.GameState
+  @game_updater   Tictactoe.Game.GameUpdater
+  @game_conductor Tictactoe.Game.GameConductor
 
   test "plays out game till the end" do
     game_state = @game_state.new_state([@player_x, @player_o])

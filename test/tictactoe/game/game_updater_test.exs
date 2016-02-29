@@ -1,11 +1,11 @@
-defmodule Tictactoe.GameUpdaterTest do
-  import Tictactoe.GameUpdater
+defmodule Tictactoe.Game.GameUpdaterTest do
+  import Tictactoe.Game.GameUpdater
   import Tictactoe.Mark
 
   @board      Tictactoe.Board
-  @game_state Tictactoe.GameState
-  @player_x   Tictactoe.GameUpdaterTest.PlayerXDouble
-  @player_o   Tictactoe.GameUpdaterTest.PlayerODouble
+  @game_state Tictactoe.Game.GameState
+  @player_x   Tictactoe.Game.GameUpdaterTest.PlayerXDouble
+  @player_o   Tictactoe.Game.GameUpdaterTest.PlayerODouble
   @ui         UIDouble
 
   use ExUnit.Case

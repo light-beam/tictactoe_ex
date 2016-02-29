@@ -1,5 +1,5 @@
-defmodule Tictactoe.GameConductor do
-  @game_state Tictactoe.GameState
+defmodule Tictactoe.Game.GameConductor do
+  @game_state Tictactoe.Game.GameState
   @board      Tictactoe.Board
 
   def play(game_state, game_updater, ui) do

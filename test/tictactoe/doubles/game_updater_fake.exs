@@ -1,7 +1,7 @@
 defmodule Tictactoe.Doubles.GameUpdaterFake do
   import Integer
   import Tictactoe.Mark
-  alias  Tictactoe.GameState
+  alias  Tictactoe.Game.GameState
 
   @board Tictactoe.Board
 

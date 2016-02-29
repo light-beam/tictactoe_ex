@@ -1,15 +1,15 @@
-defmodule Tictactoe.GameConductorTest do
+defmodule Tictactoe.Game.GameConductorTest do
   use ExUnit.Case
 
-  import Tictactoe.GameConductor
+  import Tictactoe.Game.GameConductor
   import Tictactoe.Helpers
 
   @board             Tictactoe.Board
-  @game_state        Tictactoe.GameState
+  @game_state        Tictactoe.Game.GameState
+  @board_display_ui  Tictactoe.Game.GameConductorTest.BoardDisplayUIDouble
+  @result_display_ui Tictactoe.Game.GameConductorTest.ResultDisplayUIDouble
+  @clear_display_ui  Tictactoe.Game.GameConductorTest.ClearDisplayUIDouble
   @game_updater      Tictactoe.Doubles.GameUpdaterFake
-  @board_display_ui  Tictactoe.GameConductorTest.BoardDisplayUIDouble
-  @result_display_ui Tictactoe.GameConductorTest.ResultDisplayUIDouble
-  @clear_display_ui  Tictactoe.GameConductorTest.ClearDisplayUIDouble
 
   test "plays if game is not in final state" do
     initial_game_state = @game_state.new_state(:players)

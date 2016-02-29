@@ -1,13 +1,13 @@
-defmodule Tictactoe.GameStateTest do
-  import Tictactoe.GameState
+defmodule Tictactoe.Game.GameStateTest do
+  use ExUnit.Case
+
+  import Tictactoe.Game.GameState
   import Tictactoe.Helpers
 
   @player_x PlayerXDouble
   @player_o PlayerODouble
   @board    Tictactoe.Board
   @mark     Tictactoe.Mark
-
-  use ExUnit.Case
 
   test "starts with fresh board" do
     assert @board.fresh?(new_state(:players).board) == true

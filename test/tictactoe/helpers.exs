@@ -1,7 +1,7 @@
 defmodule Tictactoe.Helpers do
   import Tictactoe.Board
   import Tictactoe.Mark
-  alias  Tictactoe.GameState
+  alias  Tictactoe.Game.GameState
 
   def drawn_board do
     make_board([x, o, x,
