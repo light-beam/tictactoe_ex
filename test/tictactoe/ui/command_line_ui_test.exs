@@ -8,8 +8,21 @@ defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.Mark
   import ExUnit.CaptureIO
 
+  @position_prompt      "Please select position:"
   @invalid_option_alert "Invalid option, please try again"
   @non_numeric_alert    "Invalid input, number required"
+  @draw_result          "It's a draw!"
+  @farewell             "Astelavista..."
+  @game_option_prompt   "Please enter game option number:\n" <>
+                        "1 - play with a friend\n"           <>
+                        "2 - play first against AI\n"        <>
+                        "3 - play second against AI\n"       <>
+                        "4 - computer plays against itself\n"
+  @replay_prompt        "One more game?\n" <>
+                        "1 - yes\n"        <>
+                        "2 - no"
+
+
 
   test "greets" do
     output = capture_io(fn -> greet end)
@@ -17,63 +30,39 @@ defmodule Tictactoe.UI.CommandLineUITest do
     assert contains?(output, "Welcome to the Tic Tac Toe Arcade!")
   end
 
-  test "displays game options" do
+  test "gets game option" do
     output = capture_io("1", fn ->
-      get_game_option
+      assert get_game_option == :hvh
     end)
 
-    assert output == "Please enter option number:\n"  <>
-                     "1 - play with a friend\n"       <>
-                     "2 - play first against AI\n"    <>
-                     "3 - play second against AI\n"   <>
-                     "4 - computer plays against itself\n"
-  end
-
-  test "retrieves game option" do
-    capture_io("1", fn ->
-      assert get_game_option == 1
-    end)
+    assert output == @game_option_prompt
   end
 
   test "alerts and keeps requesting till valid game option" do
     output = capture_io("a\n5\n1", fn ->
-      get_game_option == 1
+      assert get_game_option == :hvh
     end)
 
     assert contains?(output, @non_numeric_alert)
     assert contains?(output, @invalid_option_alert)
   end
 
-  test "prompts for position input" do
+  test "gets position" do
     output = capture_io("1", fn ->
-      get_position(new_board)
-    end)
-
-    assert contains?(output, "Please select position:")
-  end
-
-  test "translates position input into position" do
-    capture_io("1", fn ->
       assert get_position(new_board) == 0
     end)
-  end
 
-  test "alerts if position is taken" do
-    output = capture_io("1\n2", fn ->
-      get_position(first_position_taken_board)
-    end)
-
-    assert contains?(output, @invalid_option_alert)
+    assert contains?(output, @position_prompt)
   end
 
   test "alerts and keeps requesting till valid position" do
-    output = capture_io("invalid\n10\n1", fn ->
-      assert get_position(new_board) == 0
+    output = capture_io("invalid\n10\n1\n2", fn ->
+      assert get_position(first_position_taken_board) == 1
     end)
 
     assert contains?(output, @non_numeric_alert)
     assert contains?(output, @invalid_option_alert)
-    assert ends_with?(output, "Please select position:\n")
+    assert ends_with?(output, @position_prompt <> "\n")
   end
 
   test "displays formatted board" do
@@ -100,7 +89,7 @@ defmodule Tictactoe.UI.CommandLineUITest do
       display_result(nil)
     end)
 
-    assert contains?(output, "It's a draw!")
+    assert contains?(output, @draw_result)
   end
 
   test "clears screen" do
@@ -111,11 +100,28 @@ defmodule Tictactoe.UI.CommandLineUITest do
     assert contains?(output, "\e[2J\e[H")
   end
 
+  test "returns translated replay option" do
+    output = capture_io("2", fn ->
+      assert get_replay_option == "no"
+    end)
+
+    assert contains?(output, @replay_prompt)
+  end
+
+  test "alerts and keeps requesting till valid replay option" do
+    output = capture_io("a\n5\n2", fn ->
+      assert get_replay_option == "no"
+    end)
+
+    assert contains?(output, @non_numeric_alert)
+    assert contains?(output, @invalid_option_alert)
+  end
+
   test "bids farewell" do
     output = capture_io(fn ->
       astelavista
     end)
 
-    assert contains?(output, "Astelavista...")
+    assert contains?(output, @farewell)
   end
 end

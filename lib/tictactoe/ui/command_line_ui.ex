@@ -3,6 +3,7 @@ defmodule Tictactoe.UI.CommandLineUI do
   @game_selector     Tictactoe.UI.GameSelector
   @board_formatter   Tictactoe.UI.BoardFormatter
   @position_selector Tictactoe.UI.PositionSelector
+  @replay_selector   Tictactoe.UI.ReplaySelector
 
   @greeting    "Welcome to the Tic Tac Toe Arcade!"
   @astelavista "Astelavista..."
@@ -34,6 +35,10 @@ defmodule Tictactoe.UI.CommandLineUI do
 
   def clear_screen do
     @io.clear_screen
+  end
+
+  def get_replay_option do
+    @replay_selector.select
   end
 
   def astelavista do
