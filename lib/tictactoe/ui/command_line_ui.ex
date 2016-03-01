@@ -10,6 +10,7 @@ defmodule Tictactoe.UI.CommandLineUI do
 
   def greet do
     @greeting |> @io.show
+    @game_selector.readable_game_options |> @io.show
   end
 
   def get_game_option do

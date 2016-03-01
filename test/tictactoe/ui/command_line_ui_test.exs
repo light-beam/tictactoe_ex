@@ -8,26 +8,27 @@ defmodule Tictactoe.UI.CommandLineUITest do
   import Tictactoe.Mark
   import ExUnit.CaptureIO
 
-  @position_prompt      "Please select position:"
-  @invalid_option_alert "Invalid option, please try again"
+  @greeting             "Welcome to the Tic Tac Toe Arcade!\n\n" <>
+                        "1 - play with a friend\n"              <>
+                        "2 - play first against AI\n"           <>
+                        "3 - play second against AI\n"          <>
+                        "4 - computer plays against itself"
+
+  @replay_prompt        "1 - yes\n" <>
+                        "2 - no\n"    <>
+                        "One more game? "
+
+  @position_prompt      "Please select position: "
+  @invalid_option_alert "This option does not exist, try again"
   @non_numeric_alert    "Invalid input, number required"
   @draw_result          "It's a draw!"
   @farewell             "Astelavista..."
-  @game_option_prompt   "Please enter game option number:\n" <>
-                        "1 - play with a friend\n"           <>
-                        "2 - play first against AI\n"        <>
-                        "3 - play second against AI\n"       <>
-                        "4 - computer plays against itself\n"
-  @replay_prompt        "One more game?\n" <>
-                        "1 - yes\n"        <>
-                        "2 - no"
-
-
+  @game_option_prompt   "Please enter game option number: "
 
   test "greets" do
     output = capture_io(fn -> greet end)
 
-    assert contains?(output, "Welcome to the Tic Tac Toe Arcade!")
+    assert contains?(output, @greeting)
   end
 
   test "gets game option" do
@@ -62,7 +63,7 @@ defmodule Tictactoe.UI.CommandLineUITest do
 
     assert contains?(output, @non_numeric_alert)
     assert contains?(output, @invalid_option_alert)
-    assert ends_with?(output, @position_prompt <> "\n")
+    assert ends_with?(output, @position_prompt)
   end
 
   test "displays formatted board" do
@@ -100,7 +101,7 @@ defmodule Tictactoe.UI.CommandLineUITest do
     assert contains?(output, "\e[2J\e[H")
   end
 
-  test "returns translated replay option" do
+  test "gets translated replay option" do
     output = capture_io("2", fn ->
       assert get_replay_option == "no"
     end)

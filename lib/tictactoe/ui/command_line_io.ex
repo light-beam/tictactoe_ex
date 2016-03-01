@@ -7,7 +7,7 @@ defmodule Tictactoe.UI.CommandLineIO do
   end
 
   def request_input(request) do
-    IO.gets(request <> @line_space)
+    IO.gets(request)
   end
 
   def clear_screen do

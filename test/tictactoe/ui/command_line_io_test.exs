@@ -18,7 +18,7 @@ defmodule Tictactoe.UI.CommandLineIOTest do
     output = capture_io(input, fn ->
       assert request_input("request") == input
     end)
-    assert output == ("request\n")
+    assert output == ("request")
   end
 
   test "clears screen" do

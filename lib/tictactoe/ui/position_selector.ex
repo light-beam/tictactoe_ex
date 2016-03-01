@@ -3,7 +3,7 @@ defmodule Tictactoe.UI.PositionSelector do
   @numeric_fetcher  Tictactoe.UI.NumericFetcher
   @option_validator Tictactoe.UI.OptionValidator
 
-  @prompt_for_position  "Please select position:"
+  @prompt_for_position  "Please select position: "
 
   def select(board) do
     @prompt_for_position

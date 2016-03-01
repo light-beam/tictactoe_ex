@@ -14,9 +14,9 @@ defmodule Tictactoe.UI.CommandLineRunner do
 
     if replay?(ui) do
       start(game, game_state, ui)
+    else
+      ui.astelavista
     end
-
-    ui.astelavista
   end
 
   defp replay?(ui) do

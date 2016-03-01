@@ -3,7 +3,7 @@ defmodule Tictactoe.UI.ReplaySelector do
   @numeric_fetcher Tictactoe.UI.NumericFetcher
   @option_validator Tictactoe.UI.OptionValidator
 
-  @replay_prompt  "One more game?"
+  @replay_prompt  "One more game? "
   @replay_options %{ 1 => "yes",
                      2 => "no" }
 
@@ -14,7 +14,7 @@ defmodule Tictactoe.UI.ReplaySelector do
   end
 
   defp prompt_for_replay do
-    @replay_prompt <> "\n" <> readable_replay_options
+    readable_replay_options <> "\n" <> @replay_prompt
   end
 
   defp readable_replay_options do
