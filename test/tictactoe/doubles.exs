@@ -38,14 +38,38 @@ defmodule Tictactoe.Doubles do
     end
   end
 
-  defmodule UIStub do
+  defmodule ClearScreenUISpy do
+    def clear_screen do
+      echo_invoked(%{name: :clear_screen, args: []})
+    end
+
+    def greet do end
+    def display_result(_) do end
+    def display_board(_) do end
+    def astelavista do end
+
     def get_game_option do
       :hvh
     end
 
+    def get_replay_option do
+      "no"
+    end
+  end
+
+  defmodule UIStub do
     def greet do end
     def display_board(_) do end
     def display_result(_) do end
     def clear_screen do end
+    def astelavista do end
+
+    def get_replay_option do
+      "no"
+    end
+
+    def get_game_option do
+      :hvh
+    end
   end
 end

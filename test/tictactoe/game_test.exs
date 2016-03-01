@@ -12,7 +12,7 @@ defmodule Tictactoe.GameTest do
   @ui                Tictactoe.Doubles.UIStub
   @board_display_ui  Tictactoe.GameTest.BoardDisplayUISpy
   @result_display_ui Tictactoe.GameTest.ResultDisplayUISpy
-  @clear_screen_ui   Tictactoe.GameTest.ClearScreenUISpy
+  @clear_screen_ui   Tictactoe.Doubles.ClearScreenUISpy
 
   test "updates board" do
     next_game_state = play_turn(fresh_game_state, @ui)
@@ -99,14 +99,5 @@ defmodule Tictactoe.GameTest do
 
     def display_board(_) do end
     def clear_screen do end
-  end
-
-  defmodule ClearScreenUISpy do
-    def clear_screen do
-      echo_invoked(%{name: :clear_screen, args: []})
-    end
-
-    def display_result(_) do end
-    def display_board(_) do end
   end
 end
