@@ -21,12 +21,6 @@ defmodule Tictactoe.Helpers do
                 void, void, void])
   end
 
-  def one_vacant_move_board do
-    make_board([x, o, x,
-                x, o, o,
-                o, x, void])
-  end
-
   def make_board(marks) do
     marks
     |> Stream.with_index
