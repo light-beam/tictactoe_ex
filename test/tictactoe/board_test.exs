@@ -71,4 +71,20 @@ defmodule Tictactoe.BoardTest do
                                               [3, 4, 5],
                                               [6, 7, 8]]
   end
+
+  test "knows current mark is X" do
+    assert current_mark(new_board) == x
+  end
+
+  test "knows when current mark is O" do
+    assert current_mark(first_position_taken_board) == o
+  end
+
+  test "knows the current mark" do
+    board = make_board([x, x, o,
+                        o, o, void,
+                        x, x, void])
+
+    assert current_mark(board) == o
+  end
 end

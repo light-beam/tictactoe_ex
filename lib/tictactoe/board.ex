@@ -1,5 +1,6 @@
 defmodule Tictactoe.Board do
   import Tictactoe.Mark
+  import Integer, only: [is_odd: 1]
 
   @dimension 3
   @default_size @dimension*@dimension
@@ -50,6 +51,21 @@ defmodule Tictactoe.Board do
     !!winner(board) || full?(board)
   end
 
+  def current_mark(board) do
+    board
+    |> count_marks
+    |> mark_from_count
+  end
+
+  defp count_marks(board) do
+    Map.values(board)
+    |> Enum.count(fn(mark) -> mark != void end)
+  end
+
+  defp mark_from_count(count) do
+    is_odd(count) && o || x
+  end
+
   def vacant_position?(board, position) do
     board |> mark_at(position) |> empty?
   end
@@ -76,8 +92,8 @@ defmodule Tictactoe.Board do
   defp lines_for(board) do
     @winning_combinations
     |> Stream.map(fn(combination) ->
-                    marks_for(board, combination)
-                  end)
+      marks_for(board, combination)
+    end)
   end
 
   defp marks_for(board, positions) do
@@ -88,7 +104,7 @@ defmodule Tictactoe.Board do
 
   defp marks_not_present?(board, marks) do
     !(board |> Enum.any?(fn({_, mark}) ->
-                           Enum.member?(marks, mark)
-                         end))
+      Enum.member?(marks, mark)
+    end))
   end
 end
