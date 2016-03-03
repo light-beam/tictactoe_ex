@@ -1,4 +1,5 @@
 defmodule Tictactoe.BoardTest do
+
   import Tictactoe.Board
   import Tictactoe.Mark
   import Tictactoe.Helpers
@@ -86,5 +87,17 @@ defmodule Tictactoe.BoardTest do
                         x, x, void])
 
     assert current_mark(board) == o
+  end
+
+  test "returns corners" do
+    assert corners == [0, 2, 6, 8]
+  end
+
+  test "returns center" do
+    assert center == 4
+  end
+
+  test "returns amount of occupied positions" do
+    assert occupied_cells_amount(new_board) == 0
   end
 end

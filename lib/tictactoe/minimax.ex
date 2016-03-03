@@ -1,6 +1,6 @@
 defmodule Tictactoe.Minimax do
 
-  @mark Tictactoe.Mark
+  @mark  Tictactoe.Mark
   @board Tictactoe.Board
 
   @win_score   10
@@ -8,15 +8,44 @@ defmodule Tictactoe.Minimax do
   @loss_score -10
 
   def best_position(board, own_mark) do
-    max_scored_position(board, own_mark)
-    |> extract_position
+    cond do
+      first_move?(board) -> corner
+      second_move?(board) -> center_or_corner(board)
+      true -> max_scored_position(board, own_mark)
+      |> extract_position
+
+    end
+  end
+
+  defp corner do
+    Enum.random(@board.corners)
+  end
+
+  defp center_or_corner(board) do
+    if @mark.empty?(@board.mark_at(board, @board.center)) do
+      @board.center
+    else
+      corner
+    end
+  end
+
+  defp first_move?(board) do
+    @board.occupied_cells_amount(board) == 0
+  end
+
+  defp second_move?(board) do
+    @board.occupied_cells_amount(board) == 1
   end
 
   defp max_scored_position(board, own_mark) do
     board
     |> @board.vacant_positions
     |> Enum.reduce(%{},
-                   fn(position, acc) -> Map.put(acc, position, score(@board.add_move(board, position, own_mark), @mark.opponent(own_mark), own_mark)) end)
+                   fn(position, acc) -> Map.put(acc,
+                                                position,
+                                                score(@board.add_move(board, position, own_mark),
+                                                      @mark.opponent(own_mark),
+                                                      own_mark)) end)
     |> Enum.max_by(fn({ _, score }) -> score end)
   end
 

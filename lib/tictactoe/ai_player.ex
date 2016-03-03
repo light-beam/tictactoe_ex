@@ -1,4 +1,5 @@
 defmodule Tictactoe.AIPlayer do
+
   @ai    Tictactoe.Minimax
   @board Tictactoe.Board
 

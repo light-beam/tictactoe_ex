@@ -12,7 +12,7 @@ If you have pulled down this repo and would like to play the game, you need to
   long version: http://elixir-lang.org/install.html
 
 - navigate to the root of the project in your terminal and run the following:
-  mix deps.get - this will compile and will install dependencies
+  `mix deps.get` + `mix compile` - this will compile and will install dependencies
   NOTE: you may get a prompt to install Hex, you would have to say yes, as you cannot install dependencies without it
 
 - to run the game:
@@ -27,7 +27,7 @@ If you have pulled down this repo and would like to play the game, you need to
   `mix test —cover` - This will print to the command line
 
 - to get test coverage details:
-  `mix coveralls.details` - This will print to the command line
+  `mix coveralls.detail` - This will print to the command line
 
 - to get test coverage as html file:
   `mix coveralls.html` - This will create cover/excoveralls.html in the root of the project

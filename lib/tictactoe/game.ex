@@ -1,4 +1,5 @@
 defmodule Tictactoe.Game do
+
   @game_state Tictactoe.GameState
   @board      Tictactoe.Board
   @mark       Tictactoe.Mark

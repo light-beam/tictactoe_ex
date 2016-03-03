@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.CommandLineIOTest do
+
   import Tictactoe.UI.CommandLineIO
   import ExUnit.CaptureIO
 

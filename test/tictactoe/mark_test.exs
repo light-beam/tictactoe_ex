@@ -1,7 +1,7 @@
 defmodule Tictactoe.MarkTest do
-  import Tictactoe.Mark
-
   use ExUnit.Case
+
+  import Tictactoe.Mark
 
   test "returns player marks" do
     assert player_marks == [x, o]

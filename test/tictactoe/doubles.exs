@@ -1,4 +1,5 @@
 defmodule Tictactoe.Doubles do
+
   import Tictactoe.Helpers
 
   defmodule PlayerXFake do

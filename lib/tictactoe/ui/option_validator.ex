@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.OptionValidator do
+
   @io Tictactoe.UI.CommandLineIO
 
   @invalid_option_alert "This option does not exist, try again"

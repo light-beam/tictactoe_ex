@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.CommandLineUI do
+
   @io                Tictactoe.UI.CommandLineIO
   @game_selector     Tictactoe.UI.GameSelector
   @board_formatter   Tictactoe.UI.BoardFormatter

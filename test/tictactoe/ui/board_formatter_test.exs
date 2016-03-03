@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.BoardFormatterTest do
+
   import Tictactoe.UI.BoardFormatter
   import Tictactoe.Board
   import Tictactoe.Helpers

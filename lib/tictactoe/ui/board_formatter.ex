@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.BoardFormatter do
+
   import Tictactoe.Mark
 
   @board Tictactoe.Board

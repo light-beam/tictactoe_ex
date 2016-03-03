@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.PositionSelector do
+
   @board            Tictactoe.Board
   @numeric_fetcher  Tictactoe.UI.NumericFetcher
   @option_validator Tictactoe.UI.OptionValidator

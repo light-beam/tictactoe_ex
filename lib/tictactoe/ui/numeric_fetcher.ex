@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.NumericFetcher do
+
   @io Tictactoe.UI.CommandLineIO
 
   @non_numeric_input_alert "Invalid input, number required"

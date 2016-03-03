@@ -1,4 +1,5 @@
 defmodule Tictactoe.UI.GameSelector do
+
   @numeric_fetcher  Tictactoe.UI.NumericFetcher
   @option_validator Tictactoe.UI.OptionValidator
   

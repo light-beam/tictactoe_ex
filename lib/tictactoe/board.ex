@@ -1,4 +1,5 @@
 defmodule Tictactoe.Board do
+
   import Tictactoe.Mark
   import Integer, only: [is_odd: 1]
 
@@ -57,15 +58,6 @@ defmodule Tictactoe.Board do
     |> mark_from_count
   end
 
-  defp count_marks(board) do
-    Map.values(board)
-    |> Enum.count(fn(mark) -> mark != void end)
-  end
-
-  defp mark_from_count(count) do
-    is_odd(count) && o || x
-  end
-
   def vacant_position?(board, position) do
     board |> mark_at(position) |> empty?
   end
@@ -76,6 +68,27 @@ defmodule Tictactoe.Board do
 
   def get_positions(board) do
     board |> Map.keys
+  end
+
+  def center do
+    4
+  end
+
+  def corners do
+    [0, 2, 6, 8]
+  end
+
+  def occupied_cells_amount(board) do
+    @default_size - length(vacant_positions(board))
+  end
+
+  defp count_marks(board) do
+    Map.values(board)
+    |> Enum.count(fn(mark) -> mark != void end)
+  end
+
+  defp mark_from_count(count) do
+    is_odd(count) && o || x
   end
 
   defp winner_line(board) do

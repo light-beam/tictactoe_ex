@@ -1,4 +1,5 @@
 defmodule Tictactoe.HumanPlayerTest do
+
   import Tictactoe.HumanPlayer
   import Tictactoe.Helpers
 
